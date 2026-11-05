@@ -177,6 +177,7 @@ if ! stage_is_current; then
     chmod 755 "$STAGE_DIR" 2>/dev/null
     chmod 644 "$STAGE_DIR"/* 2>/dev/null
 
+    # shellcheck disable=SC2012 # ls -Z is the portable way to read SELinux labels.
     APEX_CONTEXT=$(ls -Zd "$APEX_DIR" 2>/dev/null | awk '{print $1}')
     case "$APEX_CONTEXT" in
         u:*) ;;
@@ -193,12 +194,13 @@ if ! stage_is_current; then
         log "ERROR: staged store is incomplete"
         exit 1
     fi
-    for injected_name in $(cat "$INJECTED_LIST" 2>/dev/null); do
+    while IFS= read -r injected_name; do
+        [ -n "$injected_name" ] || continue
         if [ ! -f "$STAGE_DIR/$injected_name" ]; then
             log "ERROR: staged certificate missing: $injected_name"
             exit 1
         fi
-    done
+    done < "$INJECTED_LIST"
     echo "$BOOT_ID" > "$READY_FILE"
     INJECTED_COUNT=$(wc -l < "$INJECTED_LIST" 2>/dev/null | tr -d ' ')
     log "Staged $TOTAL_COUNT certificates ($INJECTED_COUNT managed additions)"

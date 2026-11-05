@@ -77,6 +77,15 @@ app/build/outputs/ksu-module/RootCertificateManager-KernelSU.zip
 
 该 ZIP 用于手动安装模块，不包含证书。正常使用时推荐直接在 App 的“状态”页安装模块。
 
+## 持续集成
+
+仓库包含两个 GitHub Actions 工作流：
+
+- `Android CI`：在推送到 `main`、提交 Pull Request 或手动触发时，运行单元测试、Lint、Debug 构建和 KernelSU 模块打包，并上传 APK、模块 ZIP 与测试报告。
+- `KernelSU Module Validation`：检查模块 Shell 脚本的语法与 ShellCheck 规则、拒绝 CRLF 换行、验证模块 ID，并生成模块 ZIP。
+
+工作流文件位于 `.github/workflows/`。
+
 ## 使用流程
 
 1. 打开 App，在 KernelSU 中授予 Root 权限。

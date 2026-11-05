@@ -1,6 +1,5 @@
 #!/system/bin/sh
 
-MODDIR=${0%/*}
 APEX_DIR=/apex/com.android.conscrypt/cacerts
 STAGE_DIR=/data/local/tmp/root_cert_manager_cacerts
 READY_FILE=/data/local/tmp/root_cert_manager.stage_ready

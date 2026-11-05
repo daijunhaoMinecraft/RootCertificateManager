@@ -1,0 +1,70 @@
+name: KernelSU Module Validation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "app/src/main/assets/kernelsu/**"
+      - ".github/workflows/ksu-module.yml"
+  pull_request:
+    paths:
+      - "app/src/main/assets/kernelsu/**"
+      - ".github/workflows/ksu-module.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ksu-module-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate and package module
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install ShellCheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck zip
+
+      - name: Check shell syntax and style
+        run: |
+          for script in app/src/main/assets/kernelsu/*.sh; do
+            sh -n "$script"
+          done
+          shellcheck -S warning app/src/main/assets/kernelsu/*.sh
+
+      - name: Reject CRLF line endings
+        run: |
+          if grep -RIl $'\r' app/src/main/assets/kernelsu; then
+            echo "KernelSU module files must use LF line endings."
+            exit 1
+          fi
+
+      - name: Verify module metadata
+        run: grep -qx "id=root_cert_manager" app/src/main/assets/kernelsu/module.prop
+
+      - name: Package module ZIP
+        run: |
+          chmod +x app/src/main/assets/kernelsu/*.sh
+          cd app/src/main/assets/kernelsu
+          zip -r "$GITHUB_WORKSPACE/RootCertificateManager-KernelSU.zip" \
+            module.prop customize.sh post-fs-data.sh service.sh apex-inject.sh uninstall.sh README.md system
+
+      - name: Verify module ZIP layout
+        run: unzip -l RootCertificateManager-KernelSU.zip | grep -q " module.prop$"
+
+      - name: Upload module ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernelsu-module
+          path: RootCertificateManager-KernelSU.zip
+          if-no-files-found: error
