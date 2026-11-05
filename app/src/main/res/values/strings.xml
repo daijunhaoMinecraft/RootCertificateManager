@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">根证书管理器</string>
+    <string name="app_subtitle">手动管理系统根证书</string>
+    <string name="nav_status">状态</string>
+    <string name="nav_certificates">证书</string>
+
+    <string name="status_title">当前状态</string>
+    <string name="status_section_environment">运行环境</string>
+    <string name="status_section_injection">开机注入</string>
+    <string name="status_section_certificates">证书概览</string>
+    <string name="status_root_access">Root 权限</string>
+    <string name="status_root_environment">Root 环境</string>
+    <string name="status_android_version">Android 版本</string>
+    <string name="status_certificate_directory">系统证书目录</string>
+    <string name="status_authorized">已授权</string>
+    <string name="status_certificate_count">已管理 %1$d 张证书</string>
+    <string name="status_view_certificates">查看证书</string>
+    <string name="certificates_tab_title">证书列表</string>
+    <string name="certificates_tab_hint">仅显示本应用管理的证书，系统内置证书不会被修改。</string>
+    <string name="module_not_ready_cert_tab_title">开机注入模块未就绪</string>
+    <string name="module_not_ready_cert_tab_body">请先在“状态”页安装并启用模块，再导入证书。</string>
+    <string name="go_to_status">前往状态</string>
+
+    <string name="root_checking">正在获取 Root 权限…</string>
+    <string name="root_checking_detail">首次使用时，KernelSU 可能会请求授权</string>
+    <string name="root_required_body">本应用需要 su 才能管理 Android 系统根证书。请确认设备已安装 KernelSU 并为本应用授予 Root 权限。</string>
+    <string name="root_retry">重新检查</string>
+    <string name="root_exit">退出应用</string>
+    <string name="root_grant_hint">若没有弹出授权窗口，请打开 KernelSU 管理器，在“超级用户”中手动允许本应用。</string>
+    <string name="kernelsu_badge">KernelSU</string>
+    <string name="root_other_badge">标准 Root</string>
+    <string name="android_badge">Android API %1$d</string>
+    <string name="warning_kernelsu_missing">未检测到 KernelSU。当前 Root 方案可能仍支持标准模块，但开机注入行为无法保证。</string>
+
+    <string name="module_ready_title">开机自动注入已启用</string>
+    <string name="module_ready_body">当前管理 %1$d 张证书。每次开机都会自动合并到系统根证书目录。</string>
+    <string name="module_missing_title">开机注入模块未安装</string>
+    <string name="module_missing_body">安装 KernelSU 模块后，导入的证书才能在重启时进入系统根证书目录。</string>
+    <string name="module_disabled_title">开机注入模块已停用</string>
+    <string name="module_disabled_body">请在 KernelSU 管理器中启用 root_cert_manager，然后重启设备。</string>
+    <string name="module_outdated_title">开机注入模块需要更新</string>
+    <string name="module_outdated_body">已安装版本 %1$s，当前应用需要版本 %2$s。</string>
+    <string name="module_install">安装模块</string>
+    <string name="module_update">更新模块</string>
+    <string name="module_reinstall">重新安装</string>
+    <string name="module_enable">启用模块</string>
+    <string name="module_enabled_toast">模块已启用，重启设备后生效</string>
+    <string name="module_version">模块 v%1$s</string>
+    <string name="module_install_in_progress">正在安装开机模块…</string>
+    <string name="module_installed_toast">开机注入模块已安装，重启设备后生效</string>
+    <string name="module_not_ready_import">请先安装并启用开机注入模块</string>
+
+    <string name="managed_title">手动根证书</string>
+    <string name="managed_count">%1$d 张</string>
+    <string name="search_placeholder">搜索名称、颁发者或指纹</string>
+    <string name="search_clear">清除搜索</string>
+    <string name="search_empty">没有找到匹配的证书</string>
+    <string name="empty_title">还没有手动根证书</string>
+    <string name="empty_body">支持导入 .crt、.pem、.0 与 .p12 文件，并自动转换成 Android 使用的哈希证书文件。</string>
+    <string name="invalid_files_warning">有 %1$d 个证书文件无法解析，已跳过。</string>
+    <string name="loading_certificates">正在读取证书…</string>
+    <string name="import_certificate">导入证书</string>
+    <string name="changes_require_reboot">导入、删除或更新模块后，重启设备才会应用到全系统。</string>
+
+    <string name="refresh">刷新</string>
+    <string name="info">关于与帮助</string>
+    <string name="close">关闭</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="more_actions">更多操作</string>
+    <string name="certificate_icon">根证书</string>
+
+    <string name="status_valid">有效</string>
+    <string name="status_expired">已过期</string>
+    <string name="status_not_yet_valid">未生效</string>
+    <string name="badge_ca">CA</string>
+    <string name="badge_self_signed">自签名</string>
+    <string name="validity_until">有效期至 %1$s</string>
+    <string name="validity_expired">已于 %1$s 过期</string>
+    <string name="validity_starts">%1$s 起生效</string>
+
+    <string name="details_title">证书详情</string>
+    <string name="details_common_name">通用名称</string>
+    <string name="details_subject">主体</string>
+    <string name="details_issuer">颁发者</string>
+    <string name="details_validity">有效期</string>
+    <string name="details_serial">序列号</string>
+    <string name="details_fingerprint">SHA-256 指纹</string>
+    <string name="details_file">证书文件</string>
+    <string name="details_key_algorithm">公钥算法</string>
+    <string name="details_signature_algorithm">签名算法</string>
+    <string name="export_pem">导出 PEM</string>
+    <string name="delete_certificate">删除证书</string>
+    <string name="delete_title">删除证书？</string>
+    <string name="delete_message">将从开机注入模块中移除“%1$s”。重启设备后，系统将不再信任该证书。</string>
+    <string name="delete_success">证书已删除，重启后生效</string>
+    <string name="delete_in_progress">正在删除证书…</string>
+    <string name="export_success">证书已导出</string>
+
+    <string name="p12_title">输入 PKCS#12 密码</string>
+    <string name="p12_body">检测到 .p12 / .pfx 文件。若设置了密码，请在此输入；多个文件需使用相同密码。</string>
+    <string name="p12_password">密码</string>
+    <string name="p12_password_hint">留空表示没有密码</string>
+    <string name="show_password">显示密码</string>
+    <string name="hide_password">隐藏密码</string>
+    <string name="import_in_progress">正在导入证书…</string>
+    <string name="import_reading_files">正在读取证书文件…</string>
+    <string name="import_complete">导入完成</string>
+    <string name="import_summary">已导入 %1$d 张证书，跳过 %2$d 张重复证书，忽略 %3$d 张非 CA 证书。</string>
+    <string name="import_errors">部分项目未能导入：</string>
+    <string name="import_success">已导入 %1$d 张证书，重启后生效</string>
+
+    <string name="help_title">关于与帮助</string>
+    <string name="help_android14_title">Android 14 及以上</string>
+    <string name="help_android14_body">Android 14 把运行时系统证书移入 Conscrypt APEX。模块会在开机时创建合并的证书库，并绑定到 init 与 Zygote 的挂载命名空间，使之后启动的应用信任新增证书。</string>
+    <string name="help_paths_title">路径</string>
+    <string name="help_system_path">当前系统证书目录</string>
+    <string name="help_module_path">模块证书目录</string>
+    <string name="help_security_title">安全提示</string>
+    <string name="help_security_body">仅导入你明确信任的根证书。持有对应私钥的人可以解密或篡改经过该设备的 TLS 流量。卸载模块并重启可撤销注入。</string>
+    <string name="help_formats_title">支持格式</string>
+    <string name="help_formats_body">.crt、.pem、.0 支持 PEM 或 DER 编码的 X.509 证书；.p12、.pfx 会提取其中的 CA 证书，私钥不会被保存。</string>
+    <string name="help_changes_title">生效方式</string>
+    <string name="help_changes_body">导入、删除或更新模块后需要重启设备。系统内置证书始终保留，本应用只追加或移除自己管理的证书。</string>
+    <string name="help_kernelsu_title">KernelSU 提示</string>
+    <string name="help_kernelsu_body">如果为目标应用启用了“卸载模块（umount modules）”，该应用可能看不到此模块挂载的证书。请关闭目标应用的模块卸载选项，或对所有应用关闭该选项。</string>
+    <string name="view_module_log">查看模块日志</string>
+    <string name="log_title">模块注入日志</string>
+    <string name="log_empty">暂无日志。安装模块并重启后可在此查看。</string>
+    <string name="log_loading">正在读取日志…</string>
+
+    <string name="unknown">未知</string>
+    <string name="dismiss">知道了</string>
+</resources>
